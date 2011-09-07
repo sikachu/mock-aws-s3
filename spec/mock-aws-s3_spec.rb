@@ -1,9 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'fileutils'
 
 describe "Mock::AWS::S3" do
 
   describe 'when using S3Object' do
     def create_test_file(key, bucket='bucket')
+      FileUtils.mkdir_p "./tmp/mock-aws-s3/#{bucket}"
       File.open("./tmp/mock-aws-s3/#{bucket}/#{key}", 'w') {|f| f.write 'test data'}
     end
     def remove_test_file(key, bucket='bucket')
