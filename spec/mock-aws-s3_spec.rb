@@ -53,6 +53,7 @@ describe "Mock::AWS::S3" do
       end
     end
     describe '#store' do
+      after { remove_test_file 'key' }
       it 'should not do an actual request' do
         AWS::S3::S3Object.should_not_receive(:put)
         AWS::S3::S3Object.store 'key', 'some data', 'bucket'
@@ -62,7 +63,14 @@ describe "Mock::AWS::S3" do
         File.open('./tmp/mock-aws-s3/bucket/key') do |f|
           f.read.should == 'some data'
         end
-        remove_test_file 'key'
+      end
+      it 'should store the content of file object' do
+        File.open('./LICENSE') do |file|
+          AWS::S3::S3Object.store 'key', file, 'bucket'
+        end
+        File.open('./tmp/mock-aws-s3/bucket/key') do |f|
+          f.read.should == File.read('./LICENSE')
+        end
       end
     end
     describe '#value' do
