@@ -7,5 +7,5 @@ rvm:
   - ruby-head
   - ree
 before_script:
-  - 'sudo gem install jeweler aws-s3"
+  - 'sudo gem install jeweler aws-s3'
   - 'sudo gem install rspec --version="~> 1.2.9"'
