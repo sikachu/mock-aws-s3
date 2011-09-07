@@ -6,4 +6,6 @@ rvm:
   - jruby
   - ruby-head
   - ree
-before_script: "sudo gem install jeweler"
+before_script:
+  - gem install jeweler
+  - gem install rspec --version="~> 1.2.9"
